@@ -28,11 +28,14 @@ jobs:
         run: mvn clean install
         working-directory: ./deploy
 
+      - name: List files in deploy/target (Verify the .jar is being built)
+        run: ls -l ./deploy/target/
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          path: './deploy/target/*.jar'
 
   deploy:
     runs-on: ubuntu-latest
